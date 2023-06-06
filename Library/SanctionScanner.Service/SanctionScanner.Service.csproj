@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SanctionScanner.Core\SanctionScanner.Core.csproj" />
+    <ProjectReference Include="..\SanctionScanner.Model\SanctionScanner.Model.csproj" />
+  </ItemGroup>
+
+</Project>

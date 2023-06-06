@@ -1,0 +1,294 @@
+﻿@model List<ListBookViewModel>
+@{
+    ViewData["Title"] = "Index";
+    var title = "Kitaplar";
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Anasayfa</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@title</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="book" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Kitap Fotoğrafı</th>
+                                            <th>Kitap Adı</th>
+                                            <th>Yazar Adı</th>
+                                            <th>Ödünç Alan</th>
+                                            <th>Geri Dönüş Tarihi</th>
+                                            <th>Ödünç ver / Teslim Al</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <th><img src="@item.Url" width="100"></th>
+                                                <th style="text-align: left;vertical-align: middle;">@item.Name</th>
+                                                <th style="text-align: left;vertical-align: middle;">@item.Writer</th>
+
+                                                @if (item.Borrower == null)
+                                                {
+                                                    <th style="text-align: left;vertical-align: middle;">Şuan Kütüphanede</th>
+                                                }
+                                                else
+                                                {
+                                                    <th style="text-align: left;vertical-align: middle;">@item.Borrower</th>
+                                                }
+                                                @if (item.ReturnTime.ToString("dd/MM/yyyy") == "01/01/0001")
+                                                {
+                                                    <th style="text-align: left;vertical-align: middle;">Şuan Kütüphanede </th>
+                                                }
+                                                else
+                                                {
+                                                    <th style="text-align: left;vertical-align: middle;">
+                                                        <span>Ödünç Alma Tarihi: @item.BorrawingTime.ToString("dd/MM/yyyy")</span>
+                                                        <br>
+                                                        <span>Teslim Tarihi: @item.ReturnTime.ToString("dd/MM/yyyy")</span>
+                                                    </th>
+                                                }
+
+                                                @if (item.IsInLibrary)
+                                                {
+                                                    <th style="text-align: left;vertical-align: middle;">
+                                                        <button type="button" class="btn btn-success" id="borrow" onclick="passId()" value="@item.Id" data-toggle="modal" data-target="#borrowModal">Ödünç ver</button>
+                                                    </th>
+                                                }
+                                                else
+                                                {
+                                                    <th style="text-align: left;vertical-align: middle;">
+                                                        <button type="button" class="btn btn-danger" onclick="takeBack('@item.Id')">Teslim al</button>
+                                                    </th>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+<div class="modal fade" id="modal-lg" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Kitap Ekle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form asp-controller="Home" asp-action="Add" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Alternatif Resim Yükle</label>
+                        <div class="input-group">
+                            <img src="" id="photo" width="0" />
+                            <text class="text-danger" id="err"></text>
+                        </div>
+                        <br />
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" accept="image/png, image/gif, image/jpeg" class="custom-file-input" id="bookPhoto" name="file" onchange="SaveBookPhoto()" formenctype="multipart/form-data" />
+                                <label class="custom-file-label">Dosya Seçiniz</label>
+                                <input type="hidden" id="bookPhotoUrl" name="item.Url" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Kitap Adı</label>
+                        <input type="text" class="form-control" name="item.Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Yazar Adı</label>
+                        <input type="text" class="form-control" name="item.Writer">
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="borrowModal" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Kitap Ekle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form asp-controller="Home" asp-action="BorrowBook" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Teslim Tarihi:</label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" name="item.ReturnTime" data-target="#reservationdate">
+                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Teslim Alan</label>
+                        <input type="text" class="form-control" name="item.Borrower">
+                    </div>
+                    <input type="hidden" class="form-control" id="borrowHidden" name="Id">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default"  data-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $('#book').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        dom: "Bfrtip",
+        buttons: [
+            {
+                text: 'Kitap Ekle',
+                className: 'btn btn-success',
+                attr: {
+                    id: 'add',
+                    style: "float: left;margin-right:5px",
+                    "data-toggle": "modal",
+                    "data-target": "#modal-lg"
+                }
+            }
+        ]
+    });
+    $(function () {
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+    });
+    
+    function passId(){
+        $("#borrowHidden").val($('#borrow').val())
+        console.log($("#borrowHidden").val())
+    }
+
+    //$("#borrow").on("click", function () {
+        
+    //});
+
+    function SaveBookPhoto() {
+
+        var data = new FormData();
+        jQuery.each(jQuery('#bookPhoto')[0].files, function (i, file) {
+            data.append('file-' + i, file);
+        });
+
+        $.ajax({
+            url: 'https://localhost:7101/general/',
+            type: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.isSuccess) {
+                    $("#photo").prop("src", response.resultMessage).prop("width", 200);
+                    $("#bookPhotoUrl").val(response.resultMessage);
+                    $("#err").text("")
+                } else {
+                    $("#photo").prop("src", "").prop("width", 0);
+                    $("#bookPhotoUrl").val("");
+                    $("#err").text(response.resultMessage)
+                    console.log(response)
+                }
+            },
+            error: function () {
+                $("#err").text("File upload failed.");
+            }
+        })
+    }
+
+    function takeBack(id){
+        if (confirm("Kitabı Teslim Aldığınızı onaylıyor musunuz?")) {
+        $.ajax({
+            url: '/Home/TakeBook',
+            data: {Id:id},
+            success: function (response) {
+                location.reload();
+            }
+        })
+        }
+    }
+
+            //function SaveBookPhoto() {
+            //    var data = new FormData();
+            //    jQuery.each(jQuery('#bookPhoto')[0].files, function (i, file) {
+            //        data.append('file-' + i, file);
+            //    });
+            //    $.ajax({
+            //        url: '/general/UploadFile',
+            //        data: data,
+            //        cache: false,
+            //        contentType: false,
+            //        processData: false,
+            //        method: 'POST',
+            //        type: 'POST',
+            //        success: function (rooms) {
+            //            console.log(response);
+            //            if (response == "false") {
+            //                $("#ThumbImg").prop("src", "").prop("width", 0);
+            //                $("#err").text("Resim 2MB'den büyük olamaz")
+            //                $("#ThumbPictureId").val("");
+            //            } else if (response == "") {
+            //                $("#ThumbImg").prop("src", "").prop("width", 0);
+            //                $("#err").text("Resim Dosyası Seçiniz")
+            //                $("#ThumbPictureId").val("");
+            //            } else {
+            //                $("#ThumbImg").prop("src", response.picture.image).prop("width", 200);
+            //                $("#ThumbPictureId").val(response.picture.id);
+            //
+            //            }
+            //        }
+            //    })
+            //}
+
+</script>

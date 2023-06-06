@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{EA323C31-F0A5-4A8D-8D1F-F5E950EAC5C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SanctionScanner.Common", "Common\SanctionScanner.Common\SanctionScanner.Common.csproj", "{E6226B2E-E0AE-44C6-87E8-CFFBAF372F8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{5C5583D9-87F0-4CDA-917D-CE51D205D0E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanctionScanner.Core", "Library\SanctionScanner.Core\SanctionScanner.Core.csproj", "{2355E8E2-3667-4F3F-9442-BA174FFE0216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanctionScanner.Model", "Library\SanctionScanner.Model\SanctionScanner.Model.csproj", "{31E91023-9FF9-4D58-A05C-C192CFE1C021}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanctionScanner.Service", "Library\SanctionScanner.Service\SanctionScanner.Service.csproj", "{7696D5BB-14AF-4CD0-A33C-5D63EF3A09DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{03AE0EF9-6A69-4F3E-AACC-6DB20FA5C1FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanctionScanner.API", "Presentation\SanctionScanner.API\SanctionScanner.API.csproj", "{F159C26D-5C76-46B4-9F86-F3060EA4B942}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanctionScanner.UI", "Presentation\SanctionScanner.UI\SanctionScanner.UI.csproj", "{0DF2F832-B648-4307-B26E-56D9D87156CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6226B2E-E0AE-44C6-87E8-CFFBAF372F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6226B2E-E0AE-44C6-87E8-CFFBAF372F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6226B2E-E0AE-44C6-87E8-CFFBAF372F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6226B2E-E0AE-44C6-87E8-CFFBAF372F8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2355E8E2-3667-4F3F-9442-BA174FFE0216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2355E8E2-3667-4F3F-9442-BA174FFE0216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2355E8E2-3667-4F3F-9442-BA174FFE0216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2355E8E2-3667-4F3F-9442-BA174FFE0216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31E91023-9FF9-4D58-A05C-C192CFE1C021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E91023-9FF9-4D58-A05C-C192CFE1C021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E91023-9FF9-4D58-A05C-C192CFE1C021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E91023-9FF9-4D58-A05C-C192CFE1C021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7696D5BB-14AF-4CD0-A33C-5D63EF3A09DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7696D5BB-14AF-4CD0-A33C-5D63EF3A09DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7696D5BB-14AF-4CD0-A33C-5D63EF3A09DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7696D5BB-14AF-4CD0-A33C-5D63EF3A09DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F159C26D-5C76-46B4-9F86-F3060EA4B942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F159C26D-5C76-46B4-9F86-F3060EA4B942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F159C26D-5C76-46B4-9F86-F3060EA4B942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F159C26D-5C76-46B4-9F86-F3060EA4B942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF2F832-B648-4307-B26E-56D9D87156CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF2F832-B648-4307-B26E-56D9D87156CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF2F832-B648-4307-B26E-56D9D87156CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF2F832-B648-4307-B26E-56D9D87156CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E6226B2E-E0AE-44C6-87E8-CFFBAF372F8D} = {EA323C31-F0A5-4A8D-8D1F-F5E950EAC5C0}
+		{2355E8E2-3667-4F3F-9442-BA174FFE0216} = {5C5583D9-87F0-4CDA-917D-CE51D205D0E1}
+		{31E91023-9FF9-4D58-A05C-C192CFE1C021} = {5C5583D9-87F0-4CDA-917D-CE51D205D0E1}
+		{7696D5BB-14AF-4CD0-A33C-5D63EF3A09DF} = {5C5583D9-87F0-4CDA-917D-CE51D205D0E1}
+		{F159C26D-5C76-46B4-9F86-F3060EA4B942} = {03AE0EF9-6A69-4F3E-AACC-6DB20FA5C1FD}
+		{0DF2F832-B648-4307-B26E-56D9D87156CE} = {03AE0EF9-6A69-4F3E-AACC-6DB20FA5C1FD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72D76610-FBC3-4158-8DFF-00BCFEE56A59}
+	EndGlobalSection
+EndGlobal
