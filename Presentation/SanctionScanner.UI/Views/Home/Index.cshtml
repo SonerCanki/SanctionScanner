@@ -72,7 +72,7 @@
                                                 @if (item.IsInLibrary)
                                                 {
                                                     <th style="text-align: left;vertical-align: middle;">
-                                                        <button type="button" class="btn btn-success" id="borrow" onclick="passId()" value="@item.Id" data-toggle="modal" data-target="#borrowModal">Ödünç ver</button>
+                                                        <button type="button" class="btn btn-success"  onclick="passId('@item.Id')" data-toggle="modal" data-target="#borrowModal">Ödünç ver</button>
                                                     </th>
                                                 }
                                                 else
@@ -107,7 +107,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form asp-controller="Home" asp-action="Add" method="post" enctype="multipart/form-data">
+            <form asp-controller="Home" asp-action="Add" method="post" id="addForm" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Alternatif Resim Yükle</label>
@@ -127,6 +127,7 @@
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Kitap Adı</label>
                         <input type="text" class="form-control" name="item.Name">
+                        <span name="item.Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Yazar Adı</label>
@@ -135,7 +136,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                    <button type="submit" class="btn btn-primary">Ekle</button>
+                    <button type="submit" id="addBtn" class="btn btn-primary">Ekle</button>
                 </div>
             </form>
         </div>
@@ -156,7 +157,7 @@
                     <div class="form-group">
                         <label>Teslim Tarihi:</label>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" name="item.ReturnTime" data-target="#reservationdate">
+                            <input type="text" class="form-control datetimepicker-input" name="item.ReturnTime" style="pointer-events: none;" data-target="#reservationdate" >
                             <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -179,6 +180,24 @@
 
 
 <script type="text/javascript">
+
+
+
+    const form = document.getElementById('addForm');
+    const submitBtn = document.getElementById('addBtn');
+
+    form.addEventListener('submit', function (event,response) {
+        event.preventDefault();
+        console.log(event)
+        //const isValid = validateForm();
+        //if (isValid) {
+        //    $('#myModal').modal('hide');
+        //}
+    });
+
+
+
+
     $('#book').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -207,9 +226,8 @@
         });
     });
     
-    function passId(){
-        $("#borrowHidden").val($('#borrow').val())
-        console.log($("#borrowHidden").val())
+    function passId(id){
+        $("#borrowHidden").val(id)
     }
 
     //$("#borrow").on("click", function () {

@@ -34,6 +34,7 @@ namespace SanctionScanner.UI.Controllers
 
         public async Task<IActionResult> Add(AddBookViewModel item)
         {
+
             var insertResult = await _bookApi.AddBook(_mapper.Map<AddBookRequest>(item));
 
             if (insertResult.IsSuccessStatusCode && insertResult.Content.IsSuccess && insertResult.Content.ResultData != null)
@@ -41,12 +42,13 @@ namespace SanctionScanner.UI.Controllers
             else
                 TempData["Message"] = "Kayıt işlemi sırasında bir hata oluştu!...Lütfen tüm alanları kontrol edip tekrar deneyiniz...";
 
+
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> BorrowBook(Guid Id, BorrowBookViewModel item)
         {
-            var insertResult = await _bookApi.BorrowBook(Id,_mapper.Map<BorrowBookRequest>(item));
+            var insertResult = await _bookApi.BorrowBook(Id, _mapper.Map<BorrowBookRequest>(item));
 
             if (insertResult.IsSuccessStatusCode && insertResult.Content.IsSuccess && insertResult.Content.ResultData != null)
                 return RedirectToAction("Index");

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using SanctionScanner.API.Middlewares;
 using SanctionScanner.Model.Context;
 using SanctionScanner.Service.Services.Book;
 using SanctionScanner.Service.UnitOfWork;
@@ -43,6 +44,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//exception logging middleware
+app.UseErrorWrappingMiddleware();
+
 app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
